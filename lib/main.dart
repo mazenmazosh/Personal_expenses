@@ -16,6 +16,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.purple,
         accentColor: Colors.amber,
+        fontFamily: 'Quicksand',
       ),
       home: MyHomePage(),
     );
@@ -31,9 +32,9 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final List<Transaction> _userTransaction = [
-    Transaction(
-        title: 'new shoes', ammount: 68.8, date: DateTime.now(), id: 't1'),
-    Transaction(title: 'new books', ammount: 50, date: DateTime.now(), id: 't2')
+    // Transaction(
+    //     title: 'new shoes', ammount: 68.8, date: DateTime.now(), id: 't1'),
+    // Transaction(title: 'new books', ammount: 50, date: DateTime.now(), id: 't2')
   ];
   void _addNewTRansaction(String title, double? ammount) {
     final newtx = Transaction(
@@ -70,7 +71,12 @@ class _MyHomePageState extends State<MyHomePage> {
               },
               icon: const Icon(Icons.add))
         ],
-        title: const Text('Personal Expenses'),
+        title: const Text(
+          'Personal Expenses',
+          style: TextStyle(
+            fontFamily: 'OpenSans',
+          ),
+        ),
       ),
       body: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
         Container(
