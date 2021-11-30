@@ -44,7 +44,7 @@ class TransactionList extends StatelessWidget {
                       ),
                       title: Text(
                         transactions[index].title,
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 17),
                       ),
                       subtitle: Text(
