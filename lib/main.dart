@@ -45,11 +45,11 @@ class _MyHomePageState extends State<MyHomePage> {
     }).toList();
   }
 
-  void _addNewTRansaction(String title, double amount) {
+  void _addNewTRansaction(String title, double amount, DateTime? chosendate) {
     final newtx = Transaction(
         title: title,
         amount: amount,
-        date: DateTime.now(),
+        date: chosendate!,
         id: DateTime.now().toString());
 
     setState(() {
@@ -66,6 +66,12 @@ class _MyHomePageState extends State<MyHomePage> {
               onTap: () {},
               child: NewTransaction(_addNewTRansaction));
         });
+  }
+
+  void _deleteTransaction(String id) {
+    setState(() {
+      _userTransaction.removeWhere((tx) => tx.id == id);
+    });
   }
 
   @override
@@ -87,10 +93,13 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ),
       ),
-      body: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
-        Chart(_recentTransactions),
-        TransactionList(_userTransaction),
-      ]),
+      body: SingleChildScrollView(
+        child:
+            Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
+          Chart(_recentTransactions),
+          TransactionList(_userTransaction, _deleteTransaction),
+        ]),
+      ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(
         backgroundColor: Theme.of(context).accentColor,

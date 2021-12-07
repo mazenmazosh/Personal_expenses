@@ -4,7 +4,8 @@ import 'package:intl/intl.dart';
 class NewTransaction extends StatefulWidget {
   NewTransaction(this.addTransaction, {Key? key}) : super(key: key);
 
-  final Function(String title, double amount) addTransaction;
+  final Function(String title, double amount, DateTime? chosendate)
+      addTransaction;
 
   @override
   State<NewTransaction> createState() => _NewTransactionState();
@@ -16,13 +17,19 @@ class _NewTransactionState extends State<NewTransaction> {
   DateTime? _selectedDate;
 
   void _SubmitData() {
+    if (_amountController.text.isEmpty) {
+      return;
+    }
     final enteredTitle = _textController.text;
     final enteredAmmount = double.parse(_amountController.text);
-    if (enteredAmmount <= 0 || enteredTitle.isEmpty) {
+    if (enteredAmmount <= 0 || enteredTitle.isEmpty || _selectedDate == null) {
       return;
     }
     widget.addTransaction(
-        _textController.text, double.tryParse(_amountController.text)!);
+      _textController.text,
+      double.tryParse(_amountController.text)!,
+      _selectedDate,
+    );
     Navigator.pop(context);
   }
 
