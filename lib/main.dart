@@ -76,28 +76,39 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        actions: [
-          IconButton(
-              padding: const EdgeInsets.only(right: 5),
-              onPressed: () {
-                _startAddNewTransaction(context);
-              },
-              icon: const Icon(Icons.add))
-        ],
-        title: const Text(
-          'Personal Expenses',
-          style: TextStyle(
-            fontFamily: 'OpenSans',
-          ),
+    final appBar = AppBar(
+      actions: [
+        IconButton(
+            padding: const EdgeInsets.only(right: 5),
+            onPressed: () {
+              _startAddNewTransaction(context);
+            },
+            icon: const Icon(Icons.add))
+      ],
+      title: const Text(
+        'Personal Expenses',
+        style: TextStyle(
+          fontFamily: 'OpenSans',
         ),
       ),
+    );
+    return Scaffold(
+      appBar: appBar,
       body: SingleChildScrollView(
         child:
             Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
-          Chart(_recentTransactions),
-          TransactionList(_userTransaction, _deleteTransaction),
+          Container(
+              height: (MediaQuery.of(context).size.height -
+                      appBar.preferredSize.height -
+                      MediaQuery.of(context).padding.top) *
+                  0.4,
+              child: Chart(_recentTransactions)),
+          Container(
+              height: (MediaQuery.of(context).size.height -
+                      appBar.preferredSize.height -
+                      MediaQuery.of(context).padding.top) *
+                  0.6,
+              child: TransactionList(_userTransaction, _deleteTransaction)),
         ]),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
